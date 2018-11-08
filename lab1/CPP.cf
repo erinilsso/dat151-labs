@@ -1,0 +1,64 @@
+-- Programs
+
+PDefs.	Program ::= [Def];
+
+-- Comments
+
+comment	"//";
+comment	"/*" "*/";
+comment "#";
+
+-- Definitions
+
+terminator Def "";
+
+DFunc.	Def ::= Type Id "(" [Arg] ")" "{" [Stmt] "}";
+
+-- Types
+
+TInt.		Type ::= "int";
+TBool.		Type ::= "bool";
+TChar.		Type ::= "char";
+TDouble.	Type ::= "double";
+TVoid.		Type ::= "void";
+
+-- Identifier
+
+token Id (letter (letter | digit | '_') *);
+
+-- Arguments
+
+separator Arg ",";
+
+ATDecl.		Arg ::= Type;
+ADecl.		Arg ::= Type Id;
+AValDecl.	Arg ::= Type Id "=" Exp;
+
+-- Statements
+
+terminator Stmt "";
+
+SExp.		Stmt ::= Exp ";";
+SReturn.	Stmt ::= "return" Exp ";";
+
+-- Expressions
+
+ELiteral.	Exp15 ::= Literal;
+EQC.		Exp15 ::= QC;
+
+ELShift.	Exp10 ::= Exp10 "<<" Exp11;
+ERShift.	Exp10 ::= Exp10 ">>" Exp11;
+
+coercions Exp 15;
+
+-- Literals
+
+LInt.	Literal ::= Integer;
+LFloat.	Literal ::= Double;
+LChar.	Literal ::= Char;
+LStr.	Literal ::= String;
+
+-- Qualified constants
+
+QCNil.	QC ::= Id;
+QCCons.	QC ::= QC "::" Id;
