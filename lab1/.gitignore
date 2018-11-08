@@ -3,7 +3,6 @@ DocCPP.txt
 ErrM.hs
 LexCPP.x
 LexCPP.hs
-Makefile
 ParCPP.y
 PrintCPP.hs
 SkelCPP.hs
