@@ -45,6 +45,11 @@ terminator Stmt "";
 SExp.		Stmt ::= Exp ";";
 SReturn.	Stmt ::= "return" Exp ";";
 SDecl.		Stmt ::= Type [Init] ";";
+SWhile.		Stmt ::= "while" "(" Exp ")" Stmt;
+SCondIf.	Stmt ::= "if" "(" Exp ")" Stmt;
+SCondElse.	Stmt ::= "if" "(" Exp ")" Stmt "else" Stmt;
+SBlock.		Stmt ::= "{" [Stmt] "}";
+STypeDef.	Stmt ::= "typedef" Type Id ";";
 
 separator nonempty Init ",";
 
@@ -53,20 +58,45 @@ IVarInit.	Init ::= Id "=" Exp;
 
 -- Expressions
 
+separator Exp ",";
+
 ELiteral.	Exp15 ::= Literal;
 EQC.		Exp15 ::= QC;
 
+EIndex.		Exp14 ::= Exp14 "[" Exp "]";
+EFnCall.	Exp14 ::= Exp14 "(" [Exp] ")";
+EDotProj.	Exp14 ::= Exp14 "." Exp15;
+EArrProj.	Exp14 ::= Exp14 "->" Exp15;
+
+EMult.		Exp12 ::= Exp12 "*" Exp13;
+EDiv.		Exp12 ::= Exp12 "/" Exp13;
+EMod.		Exp12 ::= Exp12 "%" Exp13;
+
+EAdd.		Exp11 ::= Exp11 "+" Exp12;
+ESub.		Exp11 ::= Exp11 "-" Exp12;
+
 ELShift.	Exp10 ::= Exp10 "<<" Exp11;
 ERShift.	Exp10 ::= Exp10 ">>" Exp11;
+
+EEq.		Exp8  ::= Exp8 "==" Exp9;
+EInEq.		Exp8  ::= Exp8 "!=" Exp9;
+
+EAss.		Exp2  ::= Exp3 "=" Exp2;
+EAddAss.	Exp2  ::= Exp3 "+=" Exp2;
+ESubAss.	Exp2  ::= Exp3 "-=" Exp2;
+
+ECond.		Exp2  ::= Exp3 "?" Exp2 ":" Exp2;
 
 coercions Exp 15;
 
 -- Literals
 
+terminator nonempty String "";
+
 LInt.	Literal ::= Integer;
 LFloat.	Literal ::= Double;
 LChar.	Literal ::= Char;
-LStr.	Literal ::= String;
+LStr.	Literal ::= [String];
 
 -- Qualified constants
 
