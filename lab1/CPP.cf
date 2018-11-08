@@ -12,17 +12,30 @@ comment "#";
 
 terminator Def "";
 
-DFunc.	Def ::= Type Id "(" [Arg] ")" "{" [Stmt] "}";
+DFunc.	Def ::= Type Id "(" [Arg] ")" FuncBody;
 DUsing.	Def ::= "using" QC ";";
+DStmt.  Def ::= DefStmt;
+
+-- Function Body
+
+FBEmpty.    FuncBody ::= ";";
+FBNonEmpty. FuncBody ::= "{" [Stmt] "}";
 
 -- Types
 
-TInt.		Type ::= "int";
-TBool.		Type ::= "bool";
-TChar.		Type ::= "char";
-TDouble.	Type ::= "double";
-TVoid.		Type ::= "void";
-TQC.		Type ::= QC;
+TInt.		RealType ::= "int";
+TBool.		RealType ::= "bool";
+TChar.		RealType ::= "char";
+TDouble.	RealType ::= "double";
+TQC.		RealType ::= QC;
+TVoid.      RealType ::= "void";
+
+TMutable.   Type ::= RealType Ref;
+TConst.     Type ::= "const" RealType Ref;
+
+RNone.      Ref ::= ;
+ROne.       Ref ::= "&";
+RTwo.       Ref ::= "&" "&"; -- Ev shift reduce.
 
 -- Identifier
 
@@ -42,17 +55,21 @@ AValDecl.	Arg ::= Type Id "=" Exp;
 
 terminator Stmt "";
 
+SDef.       Stmt ::= DefStmt;
 SExp.		Stmt ::= Exp ";";
 SReturn.	Stmt ::= "return" Exp ";";
-SDecl.		Stmt ::= Type [Init] ";";
 SWhile.		Stmt ::= "while" "(" Exp ")" Stmt;
+SDoWhile.   Stmt ::= "do" Stmt "while" "(" Exp ")" ";";
+SFor.       Stmt ::= "for" "(" Decl ";" Exp ";" Exp ")" Stmt ;
 SCondIf.	Stmt ::= "if" "(" Exp ")" Stmt;
 SCondElse.	Stmt ::= "if" "(" Exp ")" Stmt "else" Stmt;
 SBlock.		Stmt ::= "{" [Stmt] "}";
-STypeDef.	Stmt ::= "typedef" Type Id ";";
 
+DSTypeDef.	DefStmt ::= "typedef" Type Id ";";
+DSDecl.		DefStmt ::= Decl ";";
+
+DDecl.      Decl ::= Type [Init];        
 separator nonempty Init ",";
-
 IVar.		Init ::= Id;
 IVarInit.	Init ::= Id "=" Exp;
 
@@ -68,6 +85,14 @@ EFnCall.	Exp14 ::= Exp14 "(" [Exp] ")";
 EDotProj.	Exp14 ::= Exp14 "." Exp15;
 EArrProj.	Exp14 ::= Exp14 "->" Exp15;
 
+EPostInc.	Exp14 ::= Exp15 "++";
+EPostDec.	Exp14 ::= Exp15 "--";
+
+EPreInc.	Exp13 ::= "++" Exp14;
+EPreDec.	Exp13 ::= "--" Exp14;
+EDeref.	    Exp13 ::= "*" Exp14;
+ENeg.	    Exp13 ::= "!" Exp14;
+
 EMult.		Exp12 ::= Exp12 "*" Exp13;
 EDiv.		Exp12 ::= Exp12 "/" Exp13;
 EMod.		Exp12 ::= Exp12 "%" Exp13;
@@ -78,14 +103,25 @@ ESub.		Exp11 ::= Exp11 "-" Exp12;
 ELShift.	Exp10 ::= Exp10 "<<" Exp11;
 ERShift.	Exp10 ::= Exp10 ">>" Exp11;
 
+ERLess.	    Exp9 ::= Exp9 "<" Exp10;
+ERGreat.	Exp9 ::= Exp9 ">" Exp10;
+ERLessEq.	Exp9 ::= Exp9 "<=" Exp10;
+ERGreatEq.	Exp9 ::= Exp9 ">=" Exp10;
+
 EEq.		Exp8  ::= Exp8 "==" Exp9;
 EInEq.		Exp8  ::= Exp8 "!=" Exp9;
+
+EConj.		Exp4  ::= Exp4 "&&" Exp5;
+
+EDisj.		Exp3  ::= Exp3 "||" Exp4;
 
 EAss.		Exp2  ::= Exp3 "=" Exp2;
 EAddAss.	Exp2  ::= Exp3 "+=" Exp2;
 ESubAss.	Exp2  ::= Exp3 "-=" Exp2;
 
 ECond.		Exp2  ::= Exp3 "?" Exp2 ":" Exp2;
+
+EExcep.     Exp1  ::= "throw" Exp2;
 
 coercions Exp 15;
 
