@@ -85,13 +85,13 @@ EFnCall.	Exp14 ::= Exp14 "(" [Exp] ")";
 EDotProj.	Exp14 ::= Exp14 "." Exp15;
 EArrProj.	Exp14 ::= Exp14 "->" Exp15;
 
-EPostInc.	Exp14 ::= Exp15 "++";
-EPostDec.	Exp14 ::= Exp15 "--";
+EPostInc.	Exp14 ::= Exp14 "++";
+EPostDec.	Exp14 ::= Exp14 "--";
 
-EPreInc.	Exp13 ::= "++" Exp14;
-EPreDec.	Exp13 ::= "--" Exp14;
-EDeref.	    Exp13 ::= "*" Exp14;
-ENeg.	    Exp13 ::= "!" Exp14;
+EPreInc.	Exp13 ::= "++" Exp13;
+EPreDec.	Exp13 ::= "--" Exp13;
+EDeref.	    Exp13 ::= "*" Exp13;
+ENeg.	    Exp13 ::= "!" Exp13;
 
 EMult.		Exp12 ::= Exp12 "*" Exp13;
 EDiv.		Exp12 ::= Exp12 "/" Exp13;
@@ -121,7 +121,7 @@ ESubAss.	Exp2  ::= Exp3 "-=" Exp2;
 
 ECond.		Exp2  ::= Exp3 "?" Exp2 ":" Exp2;
 
-EExcep.     Exp1  ::= "throw" Exp2;
+EExcep.     Exp1  ::= "throw" Exp1;
 
 coercions Exp 15;
 
