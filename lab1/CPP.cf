@@ -23,15 +23,15 @@ FBNonEmpty. FuncBody ::= "{" [Stmt] "}";
 
 -- Types
 
+TMutable.   Type ::= RealType Ref;
+TConst.     Type ::= "const" RealType Ref;
+
 TInt.		RealType ::= "int";
 TBool.		RealType ::= "bool";
 TChar.		RealType ::= "char";
 TDouble.	RealType ::= "double";
 TQC.		RealType ::= QC;
 TVoid.      RealType ::= "void";
-
-TMutable.   Type ::= RealType Ref;
-TConst.     Type ::= "const" RealType Ref;
 
 RNone.      Ref ::= ;
 ROne.       Ref ::= "&";
@@ -65,11 +65,16 @@ SCondIf.	Stmt ::= "if" "(" Exp ")" Stmt;
 SCondElse.	Stmt ::= "if" "(" Exp ")" Stmt "else" Stmt;
 SBlock.		Stmt ::= "{" [Stmt] "}";
 
+-- Definition / Statements
+
 DSTypeDef.	DefStmt ::= "typedef" Type Id ";";
 DSDecl.		DefStmt ::= Decl ";";
 
-DDecl.      Decl ::= Type [Init];        
+-- Variable declarations
+
 separator nonempty Init ",";
+
+DDecl.      Decl ::= Type [Init];        
 IVar.		Init ::= Id;
 IVarInit.	Init ::= Id "=" Exp;
 
