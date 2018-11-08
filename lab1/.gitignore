@@ -10,3 +10,6 @@ TestCPP
 TestCPP.hs
 ParCPP.hs
 
+test_suite/lab1-test-dir/*
+test_suite/progs-test-lab1
+

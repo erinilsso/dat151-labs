@@ -4,6 +4,9 @@ all:
 	alex -g LexCPP.x
 	ghc --make TestCPP.hs -o TestCPP
 
+test: all
+	cd test_suite/ && make && ./progs-test-lab1 ../CPP.cf
+
 clean:
 	-rm -f *.log *.aux *.hi *.o *.dvi
 
