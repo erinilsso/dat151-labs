@@ -13,6 +13,7 @@ comment "#";
 terminator Def "";
 
 DFunc.	Def ::= Type Id "(" [Arg] ")" "{" [Stmt] "}";
+DUsing.	Def ::= "using" QC ";";
 
 -- Types
 
@@ -21,8 +22,11 @@ TBool.		Type ::= "bool";
 TChar.		Type ::= "char";
 TDouble.	Type ::= "double";
 TVoid.		Type ::= "void";
+TQC.		Type ::= QC;
 
 -- Identifier
+
+separator nonempty Id ",";
 
 token Id (letter (letter | digit | '_') *);
 
@@ -40,6 +44,12 @@ terminator Stmt "";
 
 SExp.		Stmt ::= Exp ";";
 SReturn.	Stmt ::= "return" Exp ";";
+SDecl.		Stmt ::= Type [Init] ";";
+
+separator nonempty Init ",";
+
+IVar.		Init ::= Id;
+IVarInit.	Init ::= Id "=" Exp;
 
 -- Expressions
 
