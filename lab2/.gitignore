@@ -1,12 +1,5 @@
-AbsCPP.hs
-DocCPP.txt
-ErrM.hs
-LexCPP.hs
-LexCPP.x
-ParCPP.hs
-ParCPP.y
-PrintCPP.hs
-SkelCPP.hs
-TestCPP
-TestCPP.hs
+*.o
+*.hi
+CPP/
+lab2
 
