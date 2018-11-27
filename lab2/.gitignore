@@ -2,4 +2,5 @@
 *.hi
 CPP/
 lab2
+*.output
 
