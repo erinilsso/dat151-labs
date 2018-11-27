@@ -22,4 +22,7 @@ distclean: clean
 	-rm -f CPP/Doc.* CPP/Lex.* CPP/Par.* CPP/Layout.* CPP/Skel.* CPP/Print.* CPP/Test.* CPP/Abs.* CPP/Test CPP/ErrM.* CPP/SharedString.* CPP/ComposOp.* CPP/CPP.dtd CPP/XML.*
 	-rmdir -p CPP/
 
+test:
+	cd ./test_suite && ./progs-test-lab2 ../
+
 # EOF
