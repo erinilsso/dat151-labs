@@ -150,8 +150,8 @@ isBuiltin (Id id) = id `elem` ["printInt", "printDouble", "readInt", "readDouble
 
 evalBuiltin :: Id -> [Val] -> IO Val
 evalBuiltin (Id "printInt") (VInt i:_) = do
-                print i
-                return VVoid
+    print i
+    return VVoid
 evalBuiltin (Id "printDouble") (VDouble d:_) = do
     print d
     return VVoid

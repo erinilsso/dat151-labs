@@ -23,6 +23,6 @@ distclean: clean
 	-rmdir -p CPP/
 
 test:
-	cd ./test_suite && ./progs-test-lab2 ../
+	cd ./test_suite && make && ./progs-test-lab2 ../
 
 # EOF
