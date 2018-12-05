@@ -57,4 +57,7 @@ distclean: clean
 	-rmdir -p CPP/
 	-rm -f lab3.tar.gz lab3 Runtime.class
 
+test:
+	cd ./test_suite && make && ./progs-test-lab3 ../
+
 # EOF
