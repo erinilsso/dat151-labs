@@ -302,6 +302,3 @@ newLabel prefix = do
   env <- get
   modify (\env -> env{labelCount = 1 + labelCount env})
   return $ prefix ++ show (labelCount env)
-
-testCompileExp :: Exp -> IO ()
-testCompileExp exp = putStrLn . List.intercalate "\n" . reverse . code $ execState (compileExp exp) (emptyEnv "Foo")
