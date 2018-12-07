@@ -36,18 +36,18 @@ parse s =
 
 -- | Type check and return a type-annotated program.
 
-check :: A.Program -> IO T.Program
+check :: A.Program -> IO A.Program
 check tree =
   case typecheck tree of
     Bad err -> do
       putStrLn "TYPE ERROR"
       putStrLn err
       exitFailure
-    Ok tree' -> return tree'
+    Ok _ -> return tree
 
 -- | Compile and produce a .class file in the same directory as the source file.
 
-compile :: FilePath -> T.Program -> IO ()
+compile :: FilePath -> A.Program -> IO ()
 compile file tree = do
   -- The class name is the base name of the file.
   let (dir, name) = splitFileName file

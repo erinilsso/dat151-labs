@@ -13,4 +13,5 @@ CPP/Test.hs
 lab3
 test_suite/Runtime.class
 test_suite/progs-test-lab3
-
+*.j
+*.class
