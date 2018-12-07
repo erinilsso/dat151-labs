@@ -4,7 +4,7 @@
 ###########################################################################
 
 # Files of solution.  Add/remove files as needed.  'lab2.hs'  has to be first!
-files=lab3.hs CPP.cf Runtime.java Makefile Annotated.hs TypeChecker.hs Compiler.hs
+files=lab3.hs CPP.cf Runtime.java Makefile TypeChecker.hs Compiler.hs
 
 ###########################################################################
 

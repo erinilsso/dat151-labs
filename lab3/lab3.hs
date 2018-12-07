@@ -8,7 +8,6 @@ import System.Process     (callProcess)
 import CPP.Par                  (pProgram, myLexer)
 import CPP.ErrM                 (Err (Bad, Ok))
 import qualified CPP.Abs   as A (Program)
-import qualified Annotated as T (Program)
 import qualified Compiler  as C (compile)
 import TypeChecker              (typecheck)
 
