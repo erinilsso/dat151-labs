@@ -54,6 +54,6 @@ distclean : clean
 
 
 test:
-	cd ./test_suite && make && ./progs-test-lab4 ../
+	cd ./lab4-testsuite && ./progs-test-lab4.sh ../
 
 # EOF
