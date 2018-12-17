@@ -15,26 +15,25 @@ make
 set +o errexit
 
 # Good tests
-arr[0]="000.hs -n 101"
-# arr[0]="001.hs -v 7"
-# arr[1]="002.hs -n 5"
-# arr[2]="003.hs -v 5050"
-# arr[3]="004.hs -v 720"
-# arr[4]="005.hs -n 0"
-# arr[5]="006.hs -v 1073741824"
-# arr[6]="007.hs -v 1"
-# arr[7]="church.hs -v 8"
-# arr[8]="009.hs -v 131072"
-# arr[9]="010.hs -v 1"
-# arr[10]="010.hs -n 1"
-# arr[11]="011.hs -v 1"
-# arr[12]="011.hs -n 1"
-# arr[13]="012.hs -v 0"
-# arr[14]="013.hs -v 1"
-# arr[15]="014.hs -n 33"
-# arr[16]="015.hs -v 1"
-# arr[17]="015.hs -n 1"
-# arr[18]="ski.hs -n 16"
+arr[0]="001.hs -v 7"
+arr[1]="002.hs -n 5"
+arr[2]="003.hs -v 5050"
+arr[3]="004.hs -v 720"
+arr[4]="005.hs -n 0"
+arr[5]="006.hs -v 1073741824"
+arr[6]="007.hs -v 1"
+arr[7]="church.hs -v 8"
+arr[8]="009.hs -v 131072"
+arr[9]="010.hs -v 1"
+arr[10]="010.hs -n 1"
+arr[11]="011.hs -v 1"
+arr[12]="011.hs -n 1"
+arr[13]="012.hs -v 0"
+arr[14]="013.hs -v 1"
+arr[15]="014.hs -n 33"
+arr[16]="015.hs -v 1"
+arr[17]="015.hs -n 1"
+arr[18]="ski.hs -n 16"
 
 goodtot=0
 goodpass=0
@@ -69,20 +68,20 @@ function was_failure {
 }
 
 # Bad tests
-# badtot=0
-# badpass=0
-# for bad in "${testdir}"/bad/*.hs; do
-#     ((badtot+=1))
-#     echo -e "\033[34mxxx" "$(basename "$bad")" "xxx\033[0m"
-#     result1=$(./lab4 -v "$bad" 2>&1)
-#     result2=$(./lab4 -n "$bad" 2>&1)
-#     echo "CBV: $result1"
-#     echo "CBN: $result2"
-#     if was_failure "$result1" && was_failure "$result2"; then
-#         ((badpass+=1))
-#     fi
-#     echo
-# done
+badtot=0
+badpass=0
+for bad in "${testdir}"/bad/*.hs; do
+    ((badtot+=1))
+    echo -e "\033[34mxxx" "$(basename "$bad")" "xxx\033[0m"
+    result1=$(./lab4 -v "$bad" 2>&1)
+    result2=$(./lab4 -n "$bad" 2>&1)
+    echo "CBV: $result1"
+    echo "CBN: $result2"
+    if was_failure "$result1" && was_failure "$result2"; then
+        ((badpass+=1))
+    fi
+    echo
+done
 
 # Summary
 echo "### Summary ###"

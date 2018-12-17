@@ -1,1 +1,2 @@
-main = print ((\x -> if x < 10 then 100 else 101) 9 ) ;
+f x y = x + y ;
+main = print (if 4 then 5 else 7) ;
