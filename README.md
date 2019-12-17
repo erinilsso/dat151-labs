@@ -1,2 +1,2 @@
-# dat151-labs - Logic in Computer Science
+# dat151-labs
 
